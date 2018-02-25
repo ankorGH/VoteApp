@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://ankor:pass6789@ds247838.mlab.com:47838/voteapp");
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection
   .once("open", () => {
