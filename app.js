@@ -6,7 +6,6 @@ const AuthRoute = require("./routes/auth_routes");
 const PollRoute = require("./routes/poll_routes");
 const UserRoute = require("./routes/user_routes");
 const CookieSession = require("cookie-session");
-const keys = require("./config/config");
 
 const PORT = process.env.PORT || 4000;
 
