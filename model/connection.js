@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const keys = require("../config/config");
 
-mongoose.connect(keys.mongoConnect);
+mongoose.connect(process.env.MONGODB_URI);
 
 mongoose.connection
   .once("open", () => {

@@ -16,8 +16,7 @@ lib-cov
 
 # personal exceptions
 .vscode
-config
-
+config/config.js
 # Coverage directory used by tools like istanbul
 coverage
 

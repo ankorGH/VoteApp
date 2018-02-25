@@ -16,7 +16,7 @@ app.use(express.static(__dirname + "/public"));
 app.use(
   CookieSession({
     name: "_votingapp",
-    keys: [keys.cookieSession],
+    keys: [process.env.COOKIE],
     maxAge: 24 * 60 * 60 * 1000
   })
 );
