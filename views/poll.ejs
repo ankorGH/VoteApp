@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <% include partials/head %>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <% include partials/nav  %>
+    <main role="main">
+    <div class="container">
+    <div class="row">
+        
+        <div class="col s6">
+                <form action="/poll/show/<%=pollOwner%>/<%=poll.name%>" method="post">
+                    <div class="row">
+                            <h2 style="text-transform:capitalize;color:#666"><%=  poll["name"] %></h2>
+                            <% let p = 1 %>
+                            <% poll.options.forEach((option) => { %>
+                            <p>
+                                <input id="customRadio<%=p%>" type="radio"  name="customRadio" class="with-gap" value="<%=option["name"]%>">
+                                <label for="customRadio<%=p%>"><%=option["name"]%></label>
+                            </p>
+                            <% p = p+1 %>
+                    <% }) %>
+                    </div>
+                    <button class="waves-effect waves-light btn" type="submit">Submit</button>
+                    <% if(update) {%>
+                        <a  href="/poll/update/<%=pollOwner%>/<%=poll.name%>" class="btn red accent-4">Update</a>
+                    <% } %>
+            </form>
+        </div>
+        <div class="col s6">
+            <canvas id="chart" width="500" height="500"></canvas>
+            <% let label = [], values = [] %>
+            <% poll.options.forEach((option) => { %>
+            <% label.push(option["name"]) %>
+            <% values.push(option["size"]) %>
+            <% }) %>
+        </div>
+        
+    </div>
+    </div>
+    </main> 
+    
+    <% include partials/foot-css %>  
+    <% include partials/foot %>
+    <script src="/js/ejs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+    $(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();
+    
+    let value  = [<%=values%>] ,
+        labels = "<%=label%>".split(",")
+    console.log(labels);
+    // let tweet  = document.querySelector(".tweet");
+    // let href   = document.createAttribute("href")
+    // href.value = `https://twitter.com/intent/tweet?text=Find out my poll here&url=${window.location}&hashtags=VoteApp,freeCodeCamp,100DaysOfCode`;
+    // tweet.setAttributeNode(href);
+
+    function getRandomColors(sizeOfArray,opacity){
+        let f = Math.floor, r = Math.random
+        let randomArrayOfColors = [];
+
+        for(let i = 0; i < sizeOfArray; i++){
+            let newRandomColor = `rgba(${f(r()*255)},${f(r()*255)},${f(r()*255)},${opacity})`;
+            randomArrayOfColors.push(newRandomColor);
+        }
+        return randomArrayOfColors;
+    }
+
+    let randomColorsBorder = getRandomColors(labels.length,0.1);
+    let randomColorsMain = getRandomColors(labels.length,0.6);
+    let ctx = document.getElementById("chart");
+    let myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
+            data: value,
+            backgroundColor: randomColorsMain,
+            borderColor: randomColorsBorder,
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive:true
+        }
+    }); 
+    </script>
+  </body>
+</html> 
+

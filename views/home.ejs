@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <% include partials/head %>
+    <style>
+      #hero-message{
+        position: absolute;
+        top: 30vh;
+        left:40vh;
+        z-index: 9999999;
+      }
+    </style>
+  </head>
+  <body>
+    <% include partials/nav  %>
+      <main role="main" class="purple" id="particles-js" style="height:50vh">
+          <div id="hero-message">
+                <h4 class="h2 white-text">We Help Aggregate Your Options from A Wider Audience</h4>
+                <a href="/poll/all" class="waves-effect waves-light btn light-blue accent-3"><i class="material-icons left">arrow_forward</i>View All Polls</a>       
+          </div>
+      </main>
+
+    <% include partials/foot-css %>  
+    <% include partials/foot %>
+    <script>
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+        particlesJS.load('particles-js', 'js/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+    </script>
+  </body>
+</html> 

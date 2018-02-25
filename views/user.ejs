@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <% include partials/head %>
+    <style>
+        form{
+            position: relative;
+            top: 10px;
+        }
+        #access-buttons{
+            margin-top: 5%;
+        }
+    </style>
+  </head>
+  <body>
+    <% include partials/nav  %>
+    <main role="main">
+    <div class="container">
+    <div class="row">
+    <div class="center-align" id="access-buttons">
+        <a href="/profile/" class="btn green darken-2">New Poll</a>
+        <a href="/profile/all" class="btn amber darken-4 ">All Polls</a>    
+    </div>
+    <% if(!all) { %>
+        <form action="/poll/new" id="form" method="post" class="col s10 offset-s2">
+            <div class="row">
+                    <div class="input-field col s8">
+                            <input placeholder="Poll Name" id="username" type="text" class="validate" name="name">
+                            <label for="pollName">Poll Name</label>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s8">
+                    <input placeholder="Option 1" type="text" class="validate" name="option 1">
+                    <label for="option 1">Option 1</label>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="input-field col s8">
+                        <input placeholder="Option 2" type="text" class="validate" name="option 2">
+                        <label for="option 2">Option 2</label>
+                    </div>
+            </div>
+            <a id="moreOptions" class="btn btn-info" onclick="addNewOption()">More Options</a>
+            <button class="waves-effect waves-light btn" type="submit">Submit</button>
+        </form>
+    <%} else {%>
+        <div class="row">
+            <div class="col s8 offset-s2">
+                    <ul class="collection">
+                            <% user.polls.forEach(function(poll) { %>
+                            <li class="collection-item dismissable">
+                                <div><a style="color:#555;font-size:1.5rem;text-transform:capitalize" href="/poll/show/<%=user["id"]%>/<%=poll["name"]%>"><%=poll["name"]%></a><a href="/poll/delete/<%=poll["id"]%>" class="secondary-content"><i class="material-icons" style="color:red">delete</i></a>
+                                </div>
+                            </li>
+                            <% }) %>
+                    </ul>
+            </div>
+        </div>
+    
+                        
+    <% } %>
+    </div>
+    </div>
+    </main> 
+    
+    <% include partials/foot-css %>  
+    <% include partials/foot %>
+    <script>
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+
+        let i = 3;
+        function addNewOption(){
+            let form =  document.getElementById("form");
+            let a = document.querySelector("a#moreOptions");
+            
+            let divMain = document.createElement("div");
+            divMain.className = "row";
+            
+            let divChild = document.createElement("div");
+            divChild.className = "input-field col s8";
+            
+            let input = document.createElement("input");
+            const attributes = ["type","class","placeholder","name"];
+            let attributesValues = ["text","form-control",`Option ${i}`,`Option ${i}`]
+            attributes.forEach((attribute,index) => {
+                let att = document.createAttribute(attribute);
+                att.value = attributesValues[index];
+                input.setAttributeNode(att);
+            })
+            divChild.appendChild(input);
+            divMain.appendChild(divChild);
+            form.insertBefore(divMain,a)
+            i++;
+        }
+    </script>
+  </body>
+</html> 

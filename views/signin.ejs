@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <% include partials/head %>
+    <style>
+      form{
+        position: relative;
+        top: 10vh;;
+      }
+    </style>
+  </head>
+  <body>
+    <% include partials/nav  %>
+    <main role="main">
+                <div class="container">
+                                <div class="row">
+                                        <form action="/auth/signin" method="post" class="col s10 offset-s2">
+                                                <div class="row">
+                                                        <div class="input-field col s8">
+                                                                <i class="material-icons prefix">account_circle</i>
+                                                                <input placeholder="Placeholder" id="username" type="text" class="validate" name="username">
+                                                                <label for="username">Username</label>
+                                                        </div>
+                                                </div>
+                                                <div class="row">
+                                                   <div class="input-field col s8">
+                                                      <i class="material-icons prefix">account_balance_wallet</i>
+                                                      <input placeholder="Password" id="password" type="text" class="validate" name="password">
+                                                     <label for="first_name">Password</label>
+                                                  </div>
+                                                </div>
+                                                <button class="waves-effect waves-light btn" type="submit">Submit</button>
+                                        </form>
+                                </div>
+                              </div>
+    </main> 
+    
+    <% include partials/foot-css %>  
+    <% include partials/foot %>
+    <script>
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+    </script>
+  </body>
+</html> 
+
+
+        

@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <% include partials/head %>
+    <style>
+
+    </style>
+  </head>
+  <body>
+    <% include partials/nav  %>
+      <main role="main">
+        <% allUsers.forEach((user) => { %>    
+            <% user.polls.forEach((poll) => { %>
+            <div class="row">
+            <div class="col s6 offset-s3">
+                <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <a class="flow-text" href="/poll/show/<%=user["id"]%>/<%=poll["name"]%>" style="text-transform:capitalize;color:rgba(255,255,255,0.7);"><%=poll["name"]%></a>
+                </div>
+                <% poll.options.forEach((option) => { %>
+                    <div class="card-action">
+                            <a href=""><span class="badge white-text teal lighten-1"><%=option["size"]%></span><%=option["name"]%></a>
+                        </div>
+                <% }) %>
+                </div>
+            </div>
+            </div>
+            <% }) %>
+        <%  }) %>
+      </main>
+
+    <% include partials/foot-css %>  
+    <% include partials/foot %>
+    <script>
+        $(".dropdown-button").dropdown();
+        $(".button-collapse").sideNav();
+    </script>
+  </body>
+</html>
